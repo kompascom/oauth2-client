@@ -1,24 +1,40 @@
 <?php
 
 namespace League\OAuth2\Client\Provider;
+use Guzzle\Service\Client as GuzzleClient;
 
 class Kompas extends IdentityProvider
 {
     protected $rssResponse;
 
+    public function urlAuthorize()
+    {
+        return NULL;
+    }
+
+    public function urlUserDetails(\League\OAuth2\Client\Token\AccessToken $token)
+    {
+        return NULL;
+    }
+
+    public function userDetails($response, \League\OAuth2\Client\Token\AccessToken $token)
+    {
+       return NULL;
+    }
+
     public function urlAccessToken()
     {
-        return 'https://apis.kompas.com/oauth2/token';
+        return 'http://apis.kompas.com/oauth2/token';
     }
 
     public function urlRss()
     {
-        return 'https://apis.kompas.com/rss';
+        return 'http://apis.kompas.com/rss';
     }
 
     protected function fetchRss(\League\OAuth2\Client\Token\AccessToken $token, $query)
     {
-        $url = $this->urlRss().$query.'?'.$token;
+        $url = $this->urlRss().$query.'?access_token='.$token;
 
         try {
 
