@@ -2,6 +2,7 @@
 
 namespace League\OAuth2\Client\Provider;
 use Guzzle\Service\Client as GuzzleClient;
+use League\OAuth2\Client\Token\AccessToken;
 
 class Kompas extends IdentityProvider
 {
@@ -12,12 +13,12 @@ class Kompas extends IdentityProvider
         return NULL;
     }
 
-    public function urlUserDetails(\League\OAuth2\Client\Token\AccessToken $token)
+    public function urlUserDetails(AccessToken $token)
     {
         return NULL;
     }
 
-    public function userDetails($response, \League\OAuth2\Client\Token\AccessToken $token)
+    public function userDetails($response, AccessToken $token)
     {
        return NULL;
     }
@@ -32,7 +33,7 @@ class Kompas extends IdentityProvider
         return 'http://apis.kompas.com/rss';
     }
 
-    protected function fetchRss(\League\OAuth2\Client\Token\AccessToken $token, $query)
+    protected function fetchRss(AccessToken $token, $query)
     {
         $url = $this->urlRss().$query.'?access_token='.$token;
 
@@ -53,7 +54,7 @@ class Kompas extends IdentityProvider
         return $this->rssResponse;
     }
 
-    public function getRssLatest(\League\OAuth2\Client\Token\AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
+    public function getRssLatest(AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
     {
         $query = "/{$service}/latest/{$site_no}/{$section_id}";
         $response = $this->fetchRss($token, $query);
@@ -61,7 +62,7 @@ class Kompas extends IdentityProvider
         return $response;
     }
 
-    public function getRssMostCommented(\League\OAuth2\Client\Token\AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
+    public function getRssMostCommented(AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
     {
         $query = "/{$service}/mostcommented/{$site_no}/{$section_id}";
         $response = $this->fetchRss($token, $query);
@@ -69,7 +70,7 @@ class Kompas extends IdentityProvider
         return $response;
     }
 
-    public function getRssMostPopular(\League\OAuth2\Client\Token\AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
+    public function getRssMostPopular(AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
     {
         $query = "/{$service}/mostpopular/{$site_no}/{$section_id}";
         $response = $this->fetchRss($token, $query);
