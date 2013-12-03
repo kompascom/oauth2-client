@@ -30,7 +30,7 @@ Create a `composer.json` file in your project root:
 }
 ```
 Add this line to your application’s `index.php` file:
-```bash
+```php
 require 'vendor/autoload.php';
 ```
 
