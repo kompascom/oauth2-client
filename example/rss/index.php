@@ -26,6 +26,7 @@ try {
 
         //If you want to parse RSS and custom your view
         /*
+        $latest = $provider->getRssLatest($t);
         $latest = simplexml_load_string($latest, 'SimpleXMLElement', LIBXML_NOCDATA + LIBXML_NOERROR + LIBXML_ERR_FATAL + LIBXML_ERR_NONE);
 
         foreach($latest->channel->item as $item) {
