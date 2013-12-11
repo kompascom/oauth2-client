@@ -107,9 +107,10 @@ try {
 ```
 
 Available Feature:
-- `getRssLatest(token, service, siteno, sectionid)`
-- `getRssMostCommented(token, service, siteno, sectionid)`
-- `getRssMostPopular(token, service, siteno, sectionid)`
+`getRssLatest(token, service, siteno, sectionid)`
+`getRssMostCommented(token, service, siteno, sectionid)`
+`getRssMostPopular(token, service, siteno, sectionid)`
+
 Example:
 ```php
 $all_latest = $provider->getRssLatest(AccessToken);
