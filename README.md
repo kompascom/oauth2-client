@@ -40,7 +40,8 @@ require 'vendor/autoload.php';
 $provider = new League\OAuth2\Client\Provider\Kompas(array(
     'clientId'  =>  'XXXXXXXX',
     'clientSecret'  =>  'XXXXXXXX',
-    'redirectUri'   =>  ''
+    'redirectUri'   =>  '',
+    // 'format' => 'json' // uncomment this if you want to json output, default output is xml (rss formated)
 ));
 
 try {
@@ -50,23 +51,46 @@ try {
 
     try {
 
-        // If you want to view RSS
-        /**/
-        header("Content-Type: text/xml");
-        // We got an access token, let's now get the latest RSS
-        $latest = $provider->getRssLatest($t);
-        echo $latest;
-        /**/
+        /**
+        * default output xml (rss formatted)
+        */
 
-        //If you want to parse RSS and custom your view
-        /*
-        $latest = $provider->getRssLatest($t);
-        $latest = simplexml_load_string($latest, 'SimpleXMLElement', LIBXML_NOCDATA + LIBXML_NOERROR + LIBXML_ERR_FATAL + LIBXML_ERR_NONE);
+            // If you want to view RSS
+            /**/
+            header("Content-Type: text/xml");
+            // We got an access token, let's now get the latest RSS
+            $latest = $provider->getRssLatest($t);
+            echo $latest;
+            /**/
 
-        foreach($latest->channel->item as $item) {
-            echo "<div>{$item->title}</div>";
-            echo "<div style='padding-bottom: 10px; font-style: italic;'>{$item->description}</div>";
-        }
+            //If you want to parse RSS and custom your view
+            /*
+            $latest = $provider->getRssLatest($t);
+            $latest = simplexml_load_string($latest, 'SimpleXMLElement', LIBXML_NOCDATA + LIBXML_NOERROR + LIBXML_ERR_FATAL + LIBXML_ERR_NONE);
+
+            foreach($latest->channel->item as $item) {
+                echo "<div>{$item->title}</div>";
+                echo "<div style='padding-bottom: 10px; font-style: italic;'>{$item->description}</div>";
+            }
+            */
+
+        /**
+        * end of rss formated
+        */
+
+        /**
+        * json output (require: format => "json" in provider parameter)
+        */
+
+            /*
+            header("Content-Type: application/json");
+            // We got an access token, let's now get the latest RSS
+            $latest = $provider->getRssLatest($t);
+            echo $latest;
+            */
+
+        /**
+        * end of json output
         */
 
     } catch (Exception $e) {
@@ -80,6 +104,16 @@ try {
     // Failed to get access token
     echo $e->getMessage();
 }
+```
+
+Available Feature:
+- `getRssLatest(token, service, siteno, sectionid)`
+- `getRssMostCommented(token, service, siteno, sectionid)`
+- `getRssMostPopular(token, service, siteno, sectionid)`
+Example:
+```php
+$all_latest = $provider->getRssLatest(AccessToken);
+$news_latest = $provider->getRssLatest(AccessToken, 'kompascom', 1, 1);
 ```
 
 ## Usage for Global
