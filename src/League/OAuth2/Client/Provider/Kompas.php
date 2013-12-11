@@ -7,6 +7,7 @@ use League\OAuth2\Client\Token\AccessToken;
 class Kompas extends IdentityProvider
 {
     protected $rssResponse;
+    protected $format = 'xml';
 
     public function urlAuthorize()
     {
@@ -35,7 +36,7 @@ class Kompas extends IdentityProvider
 
     protected function fetchRss(AccessToken $token, $query)
     {
-        $url = $this->urlRss().$query.'?access_token='.$token;
+        $url = $this->urlRss().$query.'?access_token='.$token.'&format='.$this->format;
 
         try {
 
