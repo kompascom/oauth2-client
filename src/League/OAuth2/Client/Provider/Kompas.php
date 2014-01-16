@@ -43,7 +43,7 @@ class Kompas extends IdentityProvider
     protected function fetchRss(AccessToken $token, $query)
     {
         $query_param = array(
-            'access_token' => $token,
+            'access_token' => $token->accessToken,
             'format' => $this->format
         );
 
