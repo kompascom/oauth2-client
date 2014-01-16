@@ -8,6 +8,7 @@ class Kompas extends IdentityProvider
 {
     protected $rssResponse;
     protected $format = 'xml';
+    protected $filterBySite = null;
 
     public function urlAuthorize()
     {
@@ -34,9 +35,23 @@ class Kompas extends IdentityProvider
         return 'http://apis.kompas.com/rss';
     }
 
+    public function setFilterBySite($filter = null)
+    {
+        $this->filterBySite = $filter;
+    }
+
     protected function fetchRss(AccessToken $token, $query)
     {
-        $url = $this->urlRss().$query.'?access_token='.$token.'&format='.$this->format;
+        $query_param = array(
+            'access_token' => $token,
+            'format' => $this->format
+        );
+
+        if (! is_null($this->filterBySite)) {
+            $query_param['filterBySite'] = $this->filterBySite;
+        }
+
+        $url = $this->urlRss().$query.'?'.http_build_query($query_param);
 
         try {
 
