@@ -85,8 +85,14 @@ try {
             /*
             header("Content-Type: application/json");
             // We got an access token, let's now get the latest RSS
+            $provider->setFilterBySite('nasional,megapolitan');
             $latest = $provider->getRssLatest($t);
-            echo $latest;
+            echo $latest; // result filtered
+            $mostcommented = $provider->getRssMostCommented($t);
+            echo $mostcommented; // result filtered
+            $provider->setFilterBySite(); // reset filtered
+            $mostpopular = $provider->getRssMostPopular($t);
+            echo $mostpopular; // result not filtered
             */
 
         /**
@@ -111,10 +117,14 @@ Available Feature:
 `getRssLatest(token, service, siteno, sectionid)`
 `getRssMostCommented(token, service, siteno, sectionid)`
 `getRssMostPopular(token, service, siteno, sectionid)`
+`setFilterBySite(sites)` *only in `json` format
 
 Example:
 ```php
 $all_latest = $provider->getRssLatest(AccessToken);
+$provider->setFilterBySite('nasional,megapolitan'); // (,) delimiter
+$filter_latest = $provider->getRssLatest(AccessToken);
+$provider->setFilterBySite(); // reset filter
 $news_latest = $provider->getRssLatest(AccessToken, 'kompascom', 1, 1);
 ```
 
