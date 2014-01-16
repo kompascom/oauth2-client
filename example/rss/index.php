@@ -25,14 +25,8 @@ try {
             /**/
             header("Content-Type: text/xml");
             // We got an access token, let's now get the latest RSS
-            $provider->setFilterBySite('nasional,megapolitan');
             $latest = $provider->getRssLatest($t);
-            echo $latest; // result filtered
-            $mostcommented = $provider->getRssMostCommented($t);
-            echo $mostcommented; // result filtered
-            $provider->setFilterBySite(); // reset filtered
-            $mostpopular = $provider->getRssMostPopular($t);
-            echo $mostpopular; // result not filtered
+            echo $latest;
             /**/
 
             //If you want to parse RSS and custom your view
@@ -57,8 +51,14 @@ try {
             /*
             header("Content-Type: application/json");
             // We got an access token, let's now get the latest RSS
+            $provider->setFilterBySite('nasional,megapolitan');
             $latest = $provider->getRssLatest($t);
-            echo $latest;
+            echo $latest; // result filtered
+            $mostcommented = $provider->getRssMostCommented($t);
+            echo $mostcommented; // result filtered
+            $provider->setFilterBySite(); // reset filtered
+            $mostpopular = $provider->getRssMostPopular($t);
+            echo $mostpopular; // result not filtered
             */
 
         /**
