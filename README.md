@@ -26,7 +26,8 @@ Create a `composer.json` file in your project root:
 {
     "require": {
         "kompas/oauth2-client": "dev-develop"
-    }
+    },
+    "minimum-stability": "dev"
 }
 ```
 Add this line to your application’s `index.php` file:
