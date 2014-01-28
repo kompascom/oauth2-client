@@ -1,7 +1,7 @@
 {
     "name": "kompas/oauth2-client",
     "description": "OAuth 2.0 Client Library",
-    "version": "0.1",
+    "version": "0.3",
     "homepage": "https://github.com/kompascom/oauth2-client",
     "license": "MIT",
     "require": {
