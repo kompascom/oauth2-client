@@ -18,12 +18,12 @@ try {
 
         $provider->setFilterBySite('nasional,megapolitan');
         $latest = $provider->getRssLatest($t);
-        $response['latestFiltered'] = $latest; // result filtered
+        $response['latestFiltered'] = json_decode($latest, true); // result filtered
         $mostcommented = $provider->getRssMostCommented($t);
-        $response['mostCommentedFiltered'] = $mostcommented; // result filtered
+        $response['mostCommentedFiltered'] = json_decode($mostcommented, true); // result filtered
         $provider->setFilterBySite(); // reset filtered
         $mostpopular = $provider->getRssMostPopular($t);
-        $response['mostCommentedNonFiltered'] = $mostpopular; // result not filtered
+        $response['mostPopularNonFiltered'] = json_decode($mostpopular, true); // result not filtered
 
     } catch (Exception $e) {
 
