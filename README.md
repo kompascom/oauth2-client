@@ -134,8 +134,8 @@ Request body
 }
 ```
 
-1.  Kompascom: latest
-    Requires authorization
+## Kompascom: latest
+Requires authorization
 
 Request body
 - HTTP request
@@ -211,8 +211,8 @@ Request body
 ]
 ```
 
-2.  Kompascom: Most Commented
-    Requires authorization
+## Kompascom: Most Commented
+Requires authorization
 
 Request body
 - HTTP request
@@ -291,8 +291,8 @@ Request body
 ]
 ```
 
-3.  Kompascom: Most Popular
-    Requires authorization
+## Kompascom: Most Popular
+Requires authorization
 
 Request body
 - HTTP request
