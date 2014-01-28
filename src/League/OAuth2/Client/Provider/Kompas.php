@@ -1,24 +1,57 @@
 <?php
 
 namespace League\OAuth2\Client\Provider;
+use Guzzle\Service\Client as GuzzleClient;
+use League\OAuth2\Client\Token\AccessToken;
 
 class Kompas extends IdentityProvider
 {
     protected $rssResponse;
+    protected $format = 'json';
+    protected $filterBySite = null;
+
+    public function urlAuthorize()
+    {
+        return NULL;
+    }
+
+    public function urlUserDetails(AccessToken $token)
+    {
+        return NULL;
+    }
+
+    public function userDetails($response, AccessToken $token)
+    {
+       return NULL;
+    }
 
     public function urlAccessToken()
     {
-        return 'https://apis.kompas.com/oauth2/token';
+        return 'http://apis.kompas.com/oauth2/token';
     }
 
     public function urlRss()
     {
-        return 'https://apis.kompas.com/rss';
+        return 'http://apis.kompas.com/rss';
     }
 
-    protected function fetchRss(\League\OAuth2\Client\Token\AccessToken $token, $query)
+    public function setFilterBySite($filter = null)
     {
-        $url = $this->urlRss().$query.'?'.$token;
+        $this->filterBySite = $filter;
+    }
+
+    protected function fetchRss(AccessToken $token, $query)
+    {
+        $query_param = array(
+            'access_token' => $token->accessToken,
+            'format' => $this->format
+        );
+
+        if (! is_null($this->filterBySite)) {
+            $query_param['filterBySite'] = $this->filterBySite;
+        }
+
+        $url = $this->urlRss().$query.'?'.http_build_query($query_param);
 
         try {
 
@@ -37,7 +70,7 @@ class Kompas extends IdentityProvider
         return $this->rssResponse;
     }
 
-    public function getRssLatest(\League\OAuth2\Client\Token\AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
+    public function getRssLatest(AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
     {
         $query = "/{$service}/latest/{$site_no}/{$section_id}";
         $response = $this->fetchRss($token, $query);
@@ -45,7 +78,7 @@ class Kompas extends IdentityProvider
         return $response;
     }
 
-    public function getRssMostCommented(\League\OAuth2\Client\Token\AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
+    public function getRssMostCommented(AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
     {
         $query = "/{$service}/mostcommented/{$site_no}/{$section_id}";
         $response = $this->fetchRss($token, $query);
@@ -53,7 +86,7 @@ class Kompas extends IdentityProvider
         return $response;
     }
 
-    public function getRssMostPopular(\League\OAuth2\Client\Token\AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
+    public function getRssMostPopular(AccessToken $token, $service = 'kompascom', $site_no = NULL, $section_id = NULL)
     {
         $query = "/{$service}/mostpopular/{$site_no}/{$section_id}";
         $response = $this->fetchRss($token, $query);
