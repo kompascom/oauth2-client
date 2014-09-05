@@ -371,6 +371,86 @@ Request body
 ]
 ```
 
+## Kompascom: Channels
+Requires authorization
+
+Request body
+- HTTP request
+    `GET http://apis.kompas.com/rss/kompascom/channel`
+
+- Parameters
+    Require query parameters
+    - access_token [MUST value access token from authorization response]
+
+- Example
+    ```bash
+    GET /rss/kompascom/channel?access_token=xxx HTTP/1.1
+    Host: apis.kompas.com
+    Cache-Control: no-cache
+    Content-Type: application/x-www-form-urlencoded
+    ```
+
+- Response
+```bash
+{
+
+    "count": 11,
+    "items": [
+        {
+            "siteId": 1,
+            "siteSlug": "news",
+            "siteName": "News",
+            "enableFilter": false,
+            "sections": [
+                {
+                    "sectionId": 1,
+                    "sectionSlug": "nasional",
+                    "sectionName": "Nasional",
+                    "enableFilter": true
+                },
+                {
+                    "sectionId": 2,
+                    "sectionSlug": "regional",
+                    "sectionName": "Regional",
+                    "enableFilter": true
+                },
+                {
+                    "sectionId": 10,
+                    "sectionSlug": "megapolitan",
+                    "sectionName": "Megapolitan",
+                    "enableFilter": true
+                },
+                {
+                    "sectionId": 9,
+                    "sectionSlug": "internasional",
+                    "sectionName": "Internasionl",
+                    "enableFilter": true
+                },
+                {
+                    "sectionId": 29,
+                    "sectionSlug": "olahraga",
+                    "sectionName": "Olahraga",
+                    "enableFilter": true
+                },
+                {
+                    "sectionId": 53,
+                    "sectionSlug": "sains",
+                    "sectionName": "Sains",
+                    "enableFilter": true
+                },
+                {
+                    "sectionId": 355,
+                    "sectionSlug": "edukasi",
+                    "sectionName": "Edukasi",
+                    "enableFilter": true
+                }
+            ]
+        },
+        ...
+    ]
+}
+```
+
 ## License
 
 The MIT License (MIT). Please see [License File](https://github.com/php-loep/:package_name/blob/master/LICENSE) for more information.
