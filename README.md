@@ -451,6 +451,12 @@ Request body
 }
 ```
 
+#Kompascom: Available Filter By Site
+
+1. Latest (dari list channel yang field `enableFilter` = `true`)
+2. Most Commented (dari list channel yang field `enableFilter` = `true` kecuali `foto`)
+3. Most Popular (dari list channel yang field `enableFilter` = `true` kecuali `foto`)
+
 ## License
 
 The MIT License (MIT). Please see [License File](https://github.com/php-loep/:package_name/blob/master/LICENSE) for more information.
